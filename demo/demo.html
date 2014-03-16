@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="Access-Control-Allow-Origin" content="test.html">
+	<title>百度地图上实现空间插值Demo</title>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=2E92C953574c3fa5f86de9c14501c0ea"></script>
+	<script type="text/javascript" src="../src/GeoUtils.js"></script>
+	<script type="text/javascript" src="../src/spatialmap.js"></script>
+
+</head>
+<body>
+	<div id = "baiduMap" style = "width:700px;height:400px"></div>
+	<script type="text/javascript">
+		var map = new BMap.Map("baiduMap", {
+				maxZoom : 19,
+				mapType : BMAP_SATELLITE_MAP
+			});// 默认卫星地图BMAP_SATELLITE_MAP
+		var point = new BMap.Point(120.27614, 30.2754);// 地图的中心点
+		map.centerAndZoom(point, 19);
+		var opts = {// 添加控制控件
+			type : BMAP_NAVIGATION_CONTROL_SMALL,
+			showZoomInfo : true
+		};
+		map.addControl(new BMap.NavigationControl(opts));
+		map.enableScrollWheelZoom(); // 启动鼠标滚轮操作
+		map.enableContinuousZoom(); // 开启连续缩放效果
+		map.enableInertialDragging(); // 开启惯性拖拽效果
+		var maxResult = 192.47707496485583 
+		var jsonresult = [{"lat":"30.275765","lng":"120.27696","count":115.52087602867387},{"lat":"30.275706","lng":"120.277137","count":69.79140507495798},{"lat":"30.275572","lng":"120.275461","count":23.155717530126797},{"lat":"30.275176","lng":"120.27645","count":80.81129805559983},{"lat":"30.275624","lng":"120.275435","count":18.520356316635798},{"lat":"30.275281","lng":"120.276598","count":146.59637021854738},{"lat":"30.275679","lng":"120.276347","count":134.27541304906208},{"lat":"30.275765","lng":"120.275439","count":7.641966093841246},{"lat":"30.276679","lng":"120.275451","count":124.2885381264766},{"lat":"30.27662","lng":"120.275895","count":103.009340988273},{"lat":"30.276632","lng":"120.276385","count":75.16952734704859},{"lat":"30.276562","lng":"120.276987","count":128.35643874366824},{"lat":"30.276199","lng":"120.275406","count":99.82997623798701},{"lat":"30.276133","lng":"120.275868","count":53.061400554154446},{"lat":"30.276211","lng":"120.276591","count":192.47707496485583},{"lat":"30.27611","lng":"120.277027","count":24.05846030829599},{"lat":"30.276223","lng":"120.277629","count":43.88413695948255},{"lat":"30.276113","lng":"120.27788","count":63.51244540351018},{"lat":"30.275626","lng":"120.277499","count":29.00070465660216},{"lat":"30.275646","lng":"120.277912","count":49.95601899795017},{"lat":"30.275322","lng":"120.278449","count":65.46367862093501},{"lat":"30.275065","lng":"120.278453","count":7.064559012953731},{"lat":"30.275205","lng":"120.276935","count":157.25672427197404},{"lat":"30.275716","lng":"120.275821","count":186.45077839551612},{"lat":"30.275108","lng":"120.275879","count":75.57426816415193},{"lat":"30.275248","lng":"120.275983","count":96.00780032199201}] 
+		var unitResult = "%"; 
+		var name = "土壤水分";
+		var spatialMapData={
+				max  : maxResult,
+				data : jsonresult,
+				unit : unitResult
+		};
+		var config={
+			alpha : 1,
+	        legend: {
+	            title: name+'-空间分布图',
+	            offset: '20'
+	        }  
+		};
+		
+		var childSpatialmap = new SpatialmapOverlay(map, config);
+		map.addOverlay(childSpatialmap);
+		childSpatialmap.setDataSet(spatialMapData);
+	</script>
+</body>
+</html>
