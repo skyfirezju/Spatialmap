@@ -89,10 +89,10 @@
 				ctx.fillStyle = "white";
 				ctx.fillRect(0,0,35,250);
 				ctx.fillStyle = "black";
-				ctx.font = "normal bold 2px sans-serif";
+				ctx.font = "normal bold 10px 微软雅黑";
 				ctx.textBaseline = "top";
 				ctx.fillText("单位:", 0, 0);
-				ctx.fillText(unit, 5, 12);
+				ctx.fillText(unit, 10, 12);
 				var grad = ctx.createLinearGradient(20,240,5,25);
 				for(var i = 0; i < length; i++) {
 					grad.addColorStop(gradientArr[i].stop, gradientArr[i].value);
@@ -102,7 +102,7 @@
             	//添加刻度值
             	ctx.strokeStyle = "black";
             	ctx.fillStyle = "black";
-            	ctx.font = "normal bold 2px serif";
+            	ctx.font = "normal bold 10px 微软雅黑";
             	ctx.textAlign = "center";
             	ctx.textBaseline = "center";
             	ctx.beginPath();
